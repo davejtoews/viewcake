@@ -1,0 +1,23 @@
+{
+  "name": "viewcake",
+  "description": "An interactive presentation framework",
+  "main": "lib/",
+  "authors": [
+    "davejtoews"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "feathers"
+  ],
+  "homepage": "https://github.com/davejtoews/viewcake",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ]
+}

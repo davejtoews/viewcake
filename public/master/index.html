@@ -5,8 +5,8 @@
         <meta charset="utf-8">
         <title>Revealer - Reveal.js multiplexer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="components/reveal.js/css/reveal.css">
-        <link rel="stylesheet" href="components/reveal.js/css/theme/black.css" id="theme">
+        <link rel="stylesheet" href="/components/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="/components/reveal.js/css/theme/black.css" id="theme">
     </head>
     <body>
         <div class="reveal">
@@ -21,9 +21,9 @@
             </div>
         </div>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="components/reveal.js/js/reveal.js"></script>
+        <script src="/components/reveal.js/js/reveal.js"></script>
         <script type="text/javascript">
-            Reveal.initialize({history: false, controls: false, keyboard: false, touch: false});
+            Reveal.initialize({history: false});
 
             var socket = io.connect("http://localhost:3030");
             socket.on("message", function(data){
@@ -45,10 +45,6 @@
 
             Reveal.addEventListener("fragmenthidden", notifyServer);
 
-            socket.on('slidechanged', function (data) {
-              Reveal.slide(data.indexh, data.indexv, data.indexf);
-              console.log(data);
-            });
         </script>
     </body>
 </html>

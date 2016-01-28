@@ -25,7 +25,15 @@ app.configure(configuration(join(__dirname, '..')))
   .use(bodyParser.urlencoded({ extended: true }))
   .configure(hooks())
   .configure(rest())
-  .configure(socketio())
+  .configure(socketio(function(io) {
+    io.on('connection', function(socket) {
+      socket.emit("message", "Welcome to Revealer");
+      socket.on("slidechanged", function(data){
+        socket.broadcast.emit("slidechanged", data);
+        console.log("slidechanged");
+      });
+    });
+  }))
   .configure(feathersAuth(app.get('auth').local))
   .configure(services)
   .configure(middleware);
