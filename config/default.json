@@ -1,0 +1,14 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "mongodb": "mongodb://localhost:27017/feathers",
+  "public": "../public/",
+  "auth": {
+    "local": {
+      "secret": "j4PxCEaL5wQT/bBpQPdsMaD6MCykezeSgAy7WzBtEkknS7oiEJGvpBLtu/nxTFVbojZjGz+NdFuH8mdBpLwbFw==",
+      "loginEndpoint": "/login",
+      "userEndpoint": "/users",
+      "usernameField": "email"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "viewcake",
+  "description": "An interactive presentation framework",
+  "version": "0.0.0",
+  "homepage": "",
+  "main": "lib/",
+  "keywords": [
+    "feathers"
+  ],
+  "license": "MIT",
+  "repository": {},
+  "author": {},
+  "contributors": [],
+  "bugs": {},
+  "engines": {
+    "node": ">= 0.12.0"
+  },
+  "scripts": {
+    "start": "node src/",
+    "jshint": "jshint src/. test/. --config",
+    "mocha": "mocha test/ --compilers js:babel-core/register",
+    "test": "npm run jshint && npm run mocha"
+  },
+  "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "body-parser": "^1.14.2",
+    "compression": "^1.6.1",
+    "cors": "^2.7.1",
+    "feathers": "^2.0.0-pre.4",
+    "feathers-authentication": "^0.1.0",
+    "feathers-configuration": "^0.1.0",
+    "feathers-errors": "^1.1.6",
+    "feathers-hooks": "^1.0.0-pre.4",
+    "feathers-mongoose": "^3.0.4",
+    "feathers-rest": "^1.1.1",
+    "feathers-socketio": "^1.2.0",
+    "mongoose": "^4.3.7",
+    "serve-favicon": "^2.3.0",
+    "winston": "^2.1.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.1",
+    "mocha": "^2.4.4",
+    "request": "^2.69.0"
+  }
+}

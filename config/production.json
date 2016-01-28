@@ -1,0 +1,14 @@
+{
+  "host": "viewcake-app.feathersjs.com",
+  "port": 80,
+  "mongodb": "DATABASE_URL",
+  "public": "../public/",
+  "auth": {
+    "local": {
+      "secret": "FEATHERS_AUTH_SECRET",
+      "loginEndpoint": "/login",
+      "userEndpoint": "/users",
+      "usernameField": "email"
+    }
+  }
+}
