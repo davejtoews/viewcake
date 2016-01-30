@@ -12,6 +12,7 @@ import socketio from 'feathers-socketio';
 import feathersAuth from 'feathers-authentication';
 import middleware from './middleware';
 import services from './services';
+import exphbs from 'express-handlebars';
 
 let app = feathers();
 
@@ -20,7 +21,11 @@ app.configure(configuration(join(__dirname, '..')))
   .options('*', cors())
   .use(cors())
   .use(favicon( join(app.get('public'), 'favicon.ico') ))
-  .use('/', serveStatic(app.get('public')))
+  .engine('handlebars', exphbs({defaultLayout: 'main'}))
+  .set('view engine', 'handlebars')
+  .use('/', function (req, res) {
+    res.render('home');
+  })
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   .configure(hooks())
