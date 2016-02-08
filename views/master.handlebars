@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    Reveal.initialize({history: false, showNotes: true});
+
+    var socket = io.connect("http://localhost:3030");
+    socket.on("message", function(data){
+        console.log(data);
+    });
+
+    notifyServer = function(event){
+    data = {
+      indexv : Reveal.getIndices().v,
+      indexh : Reveal.getIndices().h,
+      indexf : Reveal.getIndices().f || 0
+    }
+      socket.emit("slidechanged" , data);
+    }
+
+    Reveal.addEventListener("slidechanged", notifyServer);
+
+    Reveal.addEventListener("fragmentshown", notifyServer);
+
+    Reveal.addEventListener("fragmenthidden", notifyServer);
+
+</script>

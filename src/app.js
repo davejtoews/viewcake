@@ -21,10 +21,14 @@ app.configure(configuration(join(__dirname, '..')))
   .options('*', cors())
   .use(cors())
   .use(favicon( join(app.get('public'), 'favicon.ico') ))
+  .use('/public', serveStatic(app.get('public')))
   .engine('handlebars', exphbs({defaultLayout: 'main'}))
   .set('view engine', 'handlebars')
-  .use('/', function (req, res) {
-    res.render('home');
+  .get('/', function (req, res) {
+    res.render('viewer');
+  })  
+  .get('/master', function (req, res) {
+    res.render('master');
   })
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
