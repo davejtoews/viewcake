@@ -7,12 +7,13 @@
     });
 
     notifyServer = function(event){
-    data = {
-      indexv : Reveal.getIndices().v,
-      indexh : Reveal.getIndices().h,
-      indexf : Reveal.getIndices().f || 0
-    }
-      socket.emit("slidechanged" , data);
+      data = {
+        indexv : Reveal.getIndices().v,
+        indexh : Reveal.getIndices().h,
+        indexf : Reveal.getIndices().f || 0
+      }
+        socket.emit("slidechanged" , data);
+        console.log(data);
     }
 
     Reveal.addEventListener("slidechanged", notifyServer);

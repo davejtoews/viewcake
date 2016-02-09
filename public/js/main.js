@@ -1,0 +1,1 @@
+window.Reveal = require("reveal.js");
