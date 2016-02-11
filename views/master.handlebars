@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    Reveal.initialize({history: false, showNotes: true});
+    Reveal.initialize({history: false, showNotes: true, controls: false});
 
     var socket = io.connect("http://"+location.hostname+":3030");
     socket.on("message", function(data){
@@ -13,7 +13,6 @@
         indexf : Reveal.getIndices().f || 0
       }
         socket.emit("slidechanged" , data);
-        console.log(data);
     }
 
     Reveal.addEventListener("slidechanged", notifyServer);
@@ -23,3 +22,4 @@
     Reveal.addEventListener("fragmenthidden", notifyServer);
 
 </script>
+<script src="public/js/socketInfo.js"></script>

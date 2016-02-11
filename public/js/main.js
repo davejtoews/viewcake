@@ -1,4 +1,3 @@
 window.Reveal = require("reveal.js");
-
-var React = require('react');
-var ReactDOM = require('react-dom');
+window.React = require('react');
+window.ReactDOM = require('react-dom');

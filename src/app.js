@@ -16,6 +16,10 @@ import exphbs from 'express-handlebars';
 
 let app = feathers();
 
+function countSockets() {
+  return Object.keys(app.io.sockets.sockets).length;
+}
+
 app.configure(configuration(join(__dirname, '..')))
   .use(compress())
   .options('*', cors())
@@ -36,10 +40,13 @@ app.configure(configuration(join(__dirname, '..')))
   .configure(rest())
   .configure(socketio(function(io) {
     io.on('connection', function(socket) {
-      socket.emit("message", "Welcome to Revealer");
+      socket.emit("message", "Welcome to Viewcake");
+      socket.broadcast.emit("socketcount", countSockets());
       socket.on("slidechanged", function(data){
         socket.broadcast.emit("slidechanged", data);
-        console.log("slidechanged");
+      });
+      socket.on('disconnect', function () {
+        socket.broadcast.emit("socketcount", countSockets());
       });
     });
   }))
