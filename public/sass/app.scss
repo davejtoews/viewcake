@@ -1,3 +1,39 @@
 @import "reveal.js/css/reveal.scss";
 @import "reveal.js/css/theme/source/simple.scss";
 
+.applause {
+	position: fixed;
+	bottom: 2em;
+	left: calc(50% - 10em);
+	background: green;
+	width: 8em; 
+}
+
+.boo {
+	position: fixed;
+	bottom: 2em;
+	right: calc(50% - 10em);
+	background: red;
+	width: 8em; 
+}
+
+.reactionFilter {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: green;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 100;
+	transition: opacity .3s ease-in-out;
+}
+
+#applauseFilter {
+	background: green;
+}
+
+#booFilter {
+	background: red;
+}

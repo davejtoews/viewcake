@@ -20009,8 +20009,7 @@ module.exports = require('./lib/React');
 'use strict';
 
 window.Reveal = require("./../../bower_components/reveal.js/js/reveal.js");
-
-var React = require('react');
-var ReactDOM = require('react-dom');
+window.React = require('react');
+window.ReactDOM = require('react-dom');
 
 },{"./../../bower_components/reveal.js/js/reveal.js":1,"react":159,"react-dom":30}]},{},[160]);

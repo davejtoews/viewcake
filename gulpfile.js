@@ -18,7 +18,7 @@ gulp.task('sass', function () {
 });
  
 gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
+  gulp.watch('./public/sass/**/*.scss', ['sass']);
 });
 
 gulp.task('scripts', function() {
@@ -44,5 +44,6 @@ gulp.task('watch', function() {
     proxy: "http://localhost:3030",
     files: ["public/**/*.*", "views/**/*.*"],
     port: 7000,
-  })
+  });
+  gulp.watch('./public/sass/**/*.scss', ['sass']);
 });

@@ -22,4 +22,41 @@
 
     Reveal.addEventListener("fragmenthidden", notifyServer);
 
+    var applauseOpacity = 0;
+    var applauseFilter = document.getElementById("applauseFilter");
+
+    showApplause = function() {    
+        applauseOpacity = applauseOpacity + 0.05;
+        applauseFilter.style.opacity = applauseOpacity;
+    }
+
+    hideApplause = function() {    
+        applauseOpacity = applauseOpacity - 0.05;
+        applauseFilter.style.opacity = applauseOpacity;
+    }
+
+    socket.on("applause", function (){
+        showApplause()
+        setTimeout(hideApplause, 2000);
+        console.log(applauseOpacity);
+    });
+
+    var booOpacity = 0;
+    var booFilter = document.getElementById("booFilter");
+
+    showBoo = function() {    
+        booOpacity = booOpacity + 0.05;
+        booFilter.style.opacity = booOpacity;
+    }
+
+    hideBoo = function() {    
+        booOpacity = booOpacity - 0.05;
+        booFilter.style.opacity = booOpacity;
+    }
+
+    socket.on("boo", function (){
+        showBoo()
+        setTimeout(hideBoo, 2000);
+    });
+
 </script>

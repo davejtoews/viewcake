@@ -39,7 +39,12 @@ app.configure(configuration(join(__dirname, '..')))
       socket.emit("message", "Welcome to Revealer");
       socket.on("slidechanged", function(data){
         socket.broadcast.emit("slidechanged", data);
-        console.log("slidechanged");
+      });
+      socket.on("applause", function(){
+        socket.broadcast.emit("applause");
+      });
+      socket.on("boo", function(){
+        socket.broadcast.emit("boo");
       });
     });
   }))
