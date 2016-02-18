@@ -1,20 +1,28 @@
-# <%= name %>
+# Viewcake
 
-[![Build Status](https://travis-ci.org/<%= repository %>.png?branch=master)](https://travis-ci.org/<%= repository %>)
+An interactive presentation framework.
 
-> <%= description %>
+## Requires
 
-## About
+* [NPM](https://www.npmjs.com)
+* [Bower](http://bower.io)
+* [MongoDB](https://www.mongodb.org)
 
+## Installation
 
-## Changelog
+Clone repository then run
 
-__0.1.0__
+    npm install
+    bower install
 
-- Initial release
+## Start
+
+From the root directory run
+
+    npm start
 
 ## License
 
-Copyright (c) 2015
+Copyright (c) 2016
 
 Licensed under the [MIT license](LICENSE).
