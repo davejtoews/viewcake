@@ -17,7 +17,7 @@ Clone repository then run
 
 ## Start
 
-From the root directory run
+Make sure MongoDB is running, then from the root directory run
 
     npm start
 
