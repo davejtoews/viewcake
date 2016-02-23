@@ -33,11 +33,11 @@ var Presentation = React.createClass({
 });
 
 function loadPresentation() {
-  fetch('http://localhost:3030/slides', {
+  fetch('http://localhost:3030/api/presentations?name=' + presentationName + '&$populate=slides', {
     method: 'get'
   }).then(function (response) {
     return response.json().then(function (json) {
-      ReactDOM.render(React.createElement(Presentation, { data: json.data }), document.getElementById('reveal'));
+      ReactDOM.render(React.createElement(Presentation, { data: json.data[0].slides }), document.getElementById('reveal'));
     });
   }).catch(function (err) {
     console.log(err);

@@ -32,12 +32,12 @@ var Presentation = React.createClass({
 });
 
 function loadPresentation() {
-  fetch('http://localhost:3030/slides', {
+  fetch('http://localhost:3030/api/presentations?name='+presentationName+'&$populate=slides', {
     method: 'get'
   }).then(function(response) {
     return response.json().then(function(json){
       ReactDOM.render(
-        <Presentation data={json.data}/>,
+        <Presentation data={json.data[0].slides}/>,
         document.getElementById('reveal')
       );
     });

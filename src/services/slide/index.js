@@ -1,12 +1,12 @@
 import service from 'feathers-mongoose';
-import slides from './slides-model';
+import slide from './slide-model';
 import hooks from './hooks';
 
 export default function(){
   const app = this;
 
   let options = {
-    Model: slides,
+    Model: slide,
     paginate: {
       default: 5,
       max: 25
@@ -14,14 +14,14 @@ export default function(){
   };
 
   // Initialize our service with any options it requires
-  app.use('/slides', service(options));
+  app.use('/api/slides', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const slidesService = app.service('/slides');
+  const slideService = app.service('/api/slides');
 
   // Set up our before hooks
-  slidesService.before(hooks.before);
+  slideService.before(hooks.before);
 
   // Set up our after hooks
-  slidesService.after(hooks.after);
+  slideService.after(hooks.after);
 }

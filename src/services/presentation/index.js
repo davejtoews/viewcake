@@ -1,12 +1,12 @@
 import service from 'feathers-mongoose';
-import presentations from './presentations-model';
+import presentation from './presentation-model';
 import hooks from './hooks';
 
 export default function(){
   const app = this;
 
   let options = {
-    Model: presentations,
+    Model: presentation,
     paginate: {
       default: 5,
       max: 25
@@ -14,14 +14,14 @@ export default function(){
   };
 
   // Initialize our service with any options it requires
-  app.use('/presentations', service(options));
+  app.use('/api/presentations', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const presentationsService = app.service('/presentations');
+  const presentationService = app.service('/api/presentations');
 
   // Set up our before hooks
-  presentationsService.before(hooks.before);
+  presentationService.before(hooks.before);
 
   // Set up our after hooks
-  presentationsService.after(hooks.after);
+  presentationService.after(hooks.after);
 }

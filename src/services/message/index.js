@@ -14,10 +14,10 @@ export default function(){
   };
 
   // Initialize our service with any options it requires
-  app.use('/messages', service(options));
+  app.use('/api/messages', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const messageService = app.service('/messages');
+  const messageService = app.service('/api/messages');
 
   // Set up our before hooks
   messageService.before(hooks.before);
