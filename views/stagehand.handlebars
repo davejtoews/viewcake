@@ -1,0 +1,22 @@
+<script type="text/javascript">
+    var socket = io.connect("http://"+location.hostname+":3030");
+
+    function initReveal() {
+        Reveal.initialize({history: false, showNotes: true, controls: false});
+    }
+    
+    function initSocket() {
+        socket.on("message", function(data){
+            console.log(data);
+        }); 
+
+        socket.on('slidechanged', function (data) {
+          Reveal.slide(data.indexh, data.indexv, data.indexf);
+        });          
+    }
+
+
+</script>
+<script src="/public/js/presentation.js"></script>
+<script src="/public/js/socketInfo.js"></script>
+<script src="/public/js/timer.js"></script>

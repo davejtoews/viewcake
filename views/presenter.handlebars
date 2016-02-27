@@ -5,12 +5,13 @@
         Reveal.initialize({history: false, showNotes: true, controls: false});
 
         notifyServer = function(event){
-          data = {
-            indexv : Reveal.getIndices().v,
-            indexh : Reveal.getIndices().h,
-            indexf : Reveal.getIndices().f || 0
-          }
+            data = {
+                indexv : Reveal.getIndices().v,
+                indexh : Reveal.getIndices().h,
+                indexf : Reveal.getIndices().f || 0
+            }
             socket.emit("slidechanged" , data);
+
         }
 
         Reveal.addEventListener("slidechanged", notifyServer);
@@ -21,7 +22,6 @@
     }
     
     function initSocket() {
-        
         socket.on("message", function(data){
             console.log(data);
         });        
