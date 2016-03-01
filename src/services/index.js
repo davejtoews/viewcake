@@ -1,3 +1,5 @@
+import presentation from './presentation';
+import slide from './slide';
 import message from './message';
 import user from './user';
 
@@ -11,4 +13,6 @@ export default function() {
   
   app.configure(message);
   app.configure(user);
+  app.configure(slide);
+  app.configure(presentation);
 }

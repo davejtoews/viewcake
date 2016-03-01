@@ -34,6 +34,10 @@ app.configure(configuration(join(__dirname, '..')))
   .get('/master', function (req, res) {
     res.render('master');
   })
+  .get('/:presentation', function (req, res) {
+      var presentation = req.params.presentation;
+      res.render('viewer', { presentation: presentation });
+  })
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   .configure(hooks())
