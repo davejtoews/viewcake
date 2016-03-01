@@ -28,14 +28,14 @@ Work in progress, see [issue #6](https://github.com/davejtoews/viewcake/issues/6
 
 ## Views
 
-* Presenter: base.url/presentation/presenter
-* Viewer: base.url/presentation/
-* Stagehand: base.url/presentation/stagehand
+* Presenter: *base.url/presentation/presenter*
+* Viewer: *base.url/presentation/*
+* Stagehand: *base.url/presentation/stagehand*
 
 ## API
 
-   base.url/api/presentations
-   base.url/api/views
+    base.url/api/presentations
+    base.url/api/views
 
 See [Feathers API Docs](http://feathersjs.com/docs/)
 
