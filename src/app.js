@@ -28,15 +28,17 @@ app.configure(configuration(join(__dirname, '..')))
   .use('/public', serveStatic(app.get('public')))
   .engine('handlebars', exphbs({defaultLayout: 'main'}))
   .set('view engine', 'handlebars')
-  .get('/', function (req, res) {
-    res.render('viewer');
-  })  
-  .get('/master', function (req, res) {
-    res.render('master');
-  })
   .get('/:presentation', function (req, res) {
       var presentation = req.params.presentation;
       res.render('viewer', { presentation: presentation });
+  })
+  .get('/:presentation/presenter', function (req, res) {
+      var presentation = req.params.presentation;
+      res.render('presenter', { presentation: presentation });
+  })
+    .get('/:presentation/stagehand', function (req, res) {
+      var presentation = req.params.presentation;
+      res.render('stagehand', { presentation: presentation });
   })
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
@@ -57,5 +59,7 @@ app.configure(configuration(join(__dirname, '..')))
   .configure(feathersAuth(app.get('auth').local))
   .configure(services)
   .configure(middleware);
+
+app.service('/api/presentations').get("test").then(function(presentation){console.log(presentation)});
 
 export default app;
