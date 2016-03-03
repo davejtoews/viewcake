@@ -37,7 +37,7 @@ var presentationId;
 function loadPresentation() {
   var presentationElement = document.getElementById('reveal');
   presentationId = presentationElement.getAttribute('data-presentation-id');
-  fetch('http://localhost:3030/api/presentations/' + presentationId + '?&$populate=slides', {
+  fetch('/api/presentations/' + presentationId + '?&$populate=slides', {
     method: 'get'
   }).then(function (response) {
     return response.json().then(function (json) {
