@@ -1,8 +1,4 @@
 var Slide = React.createClass({
-  componentDidMount: function() {
-    initReveal();
-    initSocket();
-  },
   rawMarkup: function() {
     var rawMarkup = this.props.content;
     return { __html: rawMarkup };
@@ -16,6 +12,10 @@ var Slide = React.createClass({
 });
 
 var Presentation = React.createClass({
+  componentDidMount: function() {
+    initReveal();
+    initSocket();
+  },
   render: function() {
     var slideNodes = this.props.data.map(function(slide) {
       console.log(slide);
