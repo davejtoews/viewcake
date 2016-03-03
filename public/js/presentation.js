@@ -37,14 +37,8 @@ var presentationId;
 function loadPresentation() {
   var presentationElement = document.getElementById('reveal');
   presentationId = presentationElement.getAttribute('data-presentation-id');
-  fetch('/api/presentations/' + presentationId + '?&$populate=slides', {
-    method: 'get'
-  }).then(function (response) {
-    return response.json().then(function (json) {
-      ReactDOM.render(React.createElement(Presentation, { data: json.slides }), presentationElement);
-    });
-  }).catch(function (err) {
-    console.log(err);
+  socket.emit('api/presentations::get', presentationId, { $populate: ['slides'] }, function (error, data) {
+    ReactDOM.render(React.createElement(Presentation, { data: data.slides }), presentationElement);
   });
 }
 loadPresentation();
