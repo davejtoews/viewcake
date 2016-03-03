@@ -28,20 +28,26 @@ app.configure(configuration(join(__dirname, '..')))
   .use('/public', serveStatic(app.get('public')))
   .engine('handlebars', exphbs({defaultLayout: 'main'}))
   .set('view engine', 'handlebars')
+  .get('/', function (req, res) {
+     app.service('api/presentations').find({query: { name: 'march'}}).then(function(results) {
+        var presentationId  = results.data[0]._id;
+        res.render('viewer', { presentationId: presentationId });
+     });
+  })
   .get('/:presentation', function (req, res) {
-     app.service('api/presentations').find({name: req.params.presentation}).then(function(results) {
+     app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
         var presentationId  = results.data[0]._id;
         res.render('viewer', { presentationId: presentationId });
      });
   })
   .get('/:presentation/presenter', function (req, res) {
-     app.service('api/presentations').find({name: req.params.presentation}).then(function(results) {
+     app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
         var presentationId  = results.data[0]._id;
         res.render('presenter', { presentationId: presentationId });
      });
   })
   .get('/:presentation/stagehand', function (req, res) {
-     app.service('api/presentations').find({name: req.params.presentation}).then(function(results) {
+     app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
         var presentationId  = results.data[0]._id;
         res.render('stagehand', { presentationId: presentationId });
      });
