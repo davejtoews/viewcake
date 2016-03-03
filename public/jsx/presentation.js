@@ -15,7 +15,7 @@ var Presentation = React.createClass({
   componentDidMount: function() {
     setTimeout(function(){
       initReveal();
-    }, 100);
+    }, 200);
     initSocket();
   },
   render: function() {
