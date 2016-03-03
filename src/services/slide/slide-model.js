@@ -9,6 +9,7 @@ const Schema = mongoose.Schema;
 let slideSchema = new Schema({
   content: {type: String, required: true},
   background: {type: String},
+  transition: {type: String},
   createdAt: {type: Date, 'default': Date.now},
   updatedAt: {type: Date, 'default': Date.now}
 });

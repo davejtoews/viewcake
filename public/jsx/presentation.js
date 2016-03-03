@@ -9,7 +9,7 @@ var Slide = React.createClass({
   },
   render: function() {
     return (
-      <section dangerouslySetInnerHTML={this.rawMarkup()} />
+      <section data-transition={this.props.transition} data-background={this.props.background} dangerouslySetInnerHTML={this.rawMarkup()} />
 
     );
   }
@@ -20,7 +20,7 @@ var Presentation = React.createClass({
     var slideNodes = this.props.data.map(function(slide) {
       console.log(slide);
       return (
-        <Slide content={slide.content} key={slide._id}/>
+        <Slide content={slide.content} background={slide.background} transition={slide.transition} key={slide._id}/>
       );
     });
     return (
