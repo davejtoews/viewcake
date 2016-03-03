@@ -12,7 +12,7 @@ var Slide = React.createClass({
     return { __html: rawMarkup };
   },
   render: function render() {
-    return React.createElement('section', { dangerouslySetInnerHTML: this.rawMarkup() });
+    return React.createElement('section', { 'data-transition': this.props.transition, 'data-background': this.props.background, dangerouslySetInnerHTML: this.rawMarkup() });
   }
 });
 
@@ -22,7 +22,7 @@ var Presentation = React.createClass({
   render: function render() {
     var slideNodes = this.props.data.map(function (slide) {
       console.log(slide);
-      return React.createElement(Slide, { content: slide.content, key: slide._id });
+      return React.createElement(Slide, { content: slide.content, background: slide.background, transition: slide.transition, key: slide._id });
     });
     return React.createElement(
       'div',
