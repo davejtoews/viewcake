@@ -56,7 +56,7 @@ socket.on('slidechanged', function (data) {
         console.error(error);
       }
       RecordButtonRendered.addSlidechangeTime(data._id);
-      socket.emit('api/timedPresentations::update', RecordButtonRendered.state.timedPresentationId, {
+      socket.emit('api/timedPresentations::patch', RecordButtonRendered.state.timedPresentationId, {
         'slidechangeTimes': RecordButtonRendered.state.slidechangeTimes
 
       }, {}, function (error, data) {
