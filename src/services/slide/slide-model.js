@@ -4,12 +4,14 @@
 // for more of what you can do here.
 
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 let slideSchema = new Schema({
-  content: {type: String, required: true},
+  content: {type: String},
   background: {type: String},
   transition: {type: String},
+  subSlides: [{ type: ObjectId, ref: 'subSlide'}],
   createdAt: {type: Date, 'default': Date.now},
   updatedAt: {type: Date, 'default': Date.now}
 });
