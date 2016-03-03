@@ -1,3 +1,4 @@
+import subSlide from './subSlide';
 import timedPresentation from './timedPresentation';
 import slidechangeTime from './slidechangeTime';
 import presentation from './presentation';
@@ -19,4 +20,5 @@ export default function() {
   app.configure(presentation);
   app.configure(slidechangeTime);
   app.configure(timedPresentation);
+  app.configure(subSlide);
 }
