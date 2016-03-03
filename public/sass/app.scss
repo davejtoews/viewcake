@@ -1,7 +1,7 @@
 @import "reveal.js/css/reveal.scss";
 @import "reveal.js/css/theme/source/simple.scss";
 
-.LikeButton {
+.LikeButton, #RecordButton {
 	position: fixed;
 	width: 6em;
 	left: calc(50% - 3em);

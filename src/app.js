@@ -28,15 +28,23 @@ app.configure(configuration(join(__dirname, '..')))
   .use('/public', serveStatic(app.get('public')))
   .engine('handlebars', exphbs({defaultLayout: 'main'}))
   .set('view engine', 'handlebars')
-  .get('/', function (req, res) {
-    res.render('viewer');
-  })  
-  .get('/master', function (req, res) {
-    res.render('master');
-  })
   .get('/:presentation', function (req, res) {
-      var presentation = req.params.presentation;
-      res.render('viewer', { presentation: presentation });
+     app.service('api/presentations').find({name: req.params.presentation}).then(function(results) {
+        var presentationId  = results.data[0]._id;
+        res.render('viewer', { presentationId: presentationId });
+     });
+  })
+  .get('/:presentation/presenter', function (req, res) {
+     app.service('api/presentations').find({name: req.params.presentation}).then(function(results) {
+        var presentationId  = results.data[0]._id;
+        res.render('presenter', { presentationId: presentationId });
+     });
+  })
+  .get('/:presentation/stagehand', function (req, res) {
+     app.service('api/presentations').find({name: req.params.presentation}).then(function(results) {
+        var presentationId  = results.data[0]._id;
+        res.render('stagehand', { presentationId: presentationId });
+     });
   })
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
@@ -51,6 +59,9 @@ app.configure(configuration(join(__dirname, '..')))
       });
       socket.on('disconnect', function () {
         socket.broadcast.emit("socketcount", countSockets());
+      });
+      socket.on('record-slidechange', function(data){
+        console.log(data);
       });
     });
   }))
