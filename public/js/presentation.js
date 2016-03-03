@@ -3,10 +3,6 @@
 var Slide = React.createClass({
   displayName: 'Slide',
 
-  componentDidMount: function componentDidMount() {
-    initReveal();
-    initSocket();
-  },
   rawMarkup: function rawMarkup() {
     var rawMarkup = this.props.content;
     return { __html: rawMarkup };
@@ -19,6 +15,10 @@ var Slide = React.createClass({
 var Presentation = React.createClass({
   displayName: 'Presentation',
 
+  componentDidMount: function componentDidMount() {
+    initReveal();
+    initSocket();
+  },
   render: function render() {
     var slideNodes = this.props.data.map(function (slide) {
       console.log(slide);
