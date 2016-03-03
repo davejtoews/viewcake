@@ -31,14 +31,18 @@ var Presentation = React.createClass({
   }
 });
 
+var presentationId;
+
 function loadPresentation() {
-  fetch('http://localhost:3030/api/presentations?name='+presentationName+'&$populate=slides', {
+  var presentationElement = document.getElementById('reveal');
+  presentationId = presentationElement.getAttribute('data-presentation-id');
+  fetch('http://localhost:3030/api/presentations/'+presentationId+'?&$populate=slides', {
     method: 'get'
   }).then(function(response) {
     return response.json().then(function(json){
       ReactDOM.render(
-        <Presentation data={json.data[0].slides}/>,
-        document.getElementById('reveal')
+        <Presentation data={json.slides}/>,
+        presentationElement
       );
     });
   }).catch(function(err) {

@@ -1,3 +1,5 @@
+import timedPresentation from './timedPresentation';
+import slidechangeTime from './slidechangeTime';
 import presentation from './presentation';
 import slide from './slide';
 import message from './message';
@@ -15,4 +17,6 @@ export default function() {
   app.configure(user);
   app.configure(slide);
   app.configure(presentation);
+  app.configure(slidechangeTime);
+  app.configure(timedPresentation);
 }
