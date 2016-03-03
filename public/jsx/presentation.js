@@ -13,7 +13,9 @@ var Slide = React.createClass({
 
 var Presentation = React.createClass({
   componentDidMount: function() {
-    initReveal();
+    setTimeout(function(){
+      initReveal();
+    }, 20);
     initSocket();
   },
   render: function() {
