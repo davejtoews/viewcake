@@ -38,7 +38,7 @@ var presentationId;
 function loadPresentation() {
   var presentationElement = document.getElementById('reveal');
   presentationId = presentationElement.getAttribute('data-presentation-id');
-  socket.emit('api/presentations::get', presentationId, { $populate: ['slides'], $limit: 25 }, function(error, data) { 
+  socket.emit('api/presentations::get', presentationId, { $populate: ['slides'] }, function(error, data) { 
     ReactDOM.render(
       <Presentation data={data.slides}/>,
       presentationElement
