@@ -1,4 +1,3 @@
-
 import subSlide from './subSlide';
 import poll from './poll';
 import timedPresentation from './timedPresentation';
