@@ -11,7 +11,7 @@
                 indexf : Reveal.getIndices().f || 0
             }
             socket.emit("slidechanged" , data);
-
+            console.log("howdy");
         }
 
         Reveal.addEventListener("slidechanged", notifyServer);
