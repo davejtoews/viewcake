@@ -7,7 +7,8 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 let pollSchema = new Schema({
-  name: {type: String, required: true, index: true},
+  question: {type: String, required: true},
+  answers: [{type: String}],
   createdAt: {type: Date, 'default': Date.now},
   updatedAt: {type: Date, 'default': Date.now}
 });

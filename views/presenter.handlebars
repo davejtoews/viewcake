@@ -1,3 +1,4 @@
+<script src="/public/js/palette.js"></script>
 <script type="text/javascript">
     var socket = io.connect("http://"+location.hostname+":3030");
 
@@ -5,11 +6,7 @@
         Reveal.initialize({history: false, showNotes: true, controls: false});
 
         notifyServer = function(event){
-            data = {
-                indexv : Reveal.getIndices().v,
-                indexh : Reveal.getIndices().h,
-                indexf : Reveal.getIndices().f || 0
-            }
+            data = getRevealPosition();
             socket.emit("slidechanged" , data);
             console.log("howdy");
         }
@@ -20,14 +17,38 @@
 
         Reveal.addEventListener("fragmenthidden", notifyServer);
     }
+
+    function getRevealPosition() {
+        return {
+                indexv : Reveal.getIndices().v,
+                indexh : Reveal.getIndices().h,
+                indexf : Reveal.getIndices().f || 0
+        };
+    }
+
+    var chartPalette = palette('tol-sq', 10);
+
+    console.log(chartPalette);
     
     function initSocket() {
         socket.on("message", function(data){
             console.log(data);
+        });
+
+        socket.on("pollAnswered", function(data){
+            var pollElement = document.getElementById(data.pollId).parentNode;
+
+            console.log
+
+            renderPollChart(pollElement, slices);
+
+            data = getRevealPosition();
+            Reveal.slide(data.indexh, data.indexv, data.indexf);
         });        
     }
 
 
 </script>
+<script src="/public/js/poll.js"></script>
 <script src="/public/js/presentation.js"></script>
 <script src="/public/js/socketInfo.js"></script>

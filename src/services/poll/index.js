@@ -14,10 +14,10 @@ export default function(){
   };
 
   // Initialize our service with any options it requires
-  app.use('/polls', service(options));
+  app.use('/api/polls', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const pollService = app.service('/polls');
+  const pollService = app.service('/api/polls');
 
   // Set up our before hooks
   pollService.before(hooks.before);
