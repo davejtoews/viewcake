@@ -26,9 +26,9 @@
         };
     }
 
-    var chartPalette = palette('tol-sq', 10);
-
-    console.log(chartPalette);
+    
+    var chartData = {};
+    var pollElements = {}
     
     function initSocket() {
         socket.on("message", function(data){
@@ -36,11 +36,37 @@
         });
 
         socket.on("pollAnswered", function(data){
-            var pollElement = document.getElementById(data.pollId).parentNode;
+            pollId = data.pollId;
+            answer = data.answer;
+            previous = data.previous;
 
-            console.log
+            if(!pollElements[pollId]) {
+                pollElements[pollId] = document.getElementById(pollId).parentNode;
+            }
 
-            renderPollChart(pollElement, slices);
+            if(!chartData[pollId]) {
+                chartData[pollId] = {};
+            } 
+            if(!chartData[pollId][answer]) {
+                chartData[pollId][answer] = 0;
+            }
+            chartData[pollId][answer]++;
+
+            if(previous) {
+                if(!chartData[pollId][previous]) {
+                    chartData[pollId][previous] = 0;
+                }
+                chartData[pollId][previous]--;
+            }
+
+            var chartPalette = palette('tol-sq', Object.keys(chartData[pollId]).length);
+            slices = Object.keys(chartData[pollId]).map(function(sliceName, i){
+                return { key: sliceName, value: chartData[pollId][sliceName], color: "#" + chartPalette[i] }
+            });
+
+            console.log(slices);
+
+            renderPollChart(pollElements[pollId], slices);
 
             data = getRevealPosition();
             Reveal.slide(data.indexh, data.indexv, data.indexf);

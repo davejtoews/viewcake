@@ -37,10 +37,34 @@ var Poll = React.createClass({
   }
 });
 
+var PollKey = React.createClass({
+  render: function() {
+    return (
+      <div className="poll-key">
+        {
+          this.props.slices.map(function(slice){
+            return (
+              <div className="poll-key-entry" key={slice.key} >
+                <h4>{slice.key}</h4>
+                <svg width="200" height="100">
+                  <rect width="300" height="100" style={{fill:slice.color}} />
+                </svg>
+              </div>
+            );
+          })
+        }
+      </div>
+    );
+  }
+});
+
 
 function renderPollChart(element, slices) {
   ReactDOM.render(
-    <PieChart slices={slices} />,
+    <div className="chart-wrapper">
+      <PieChart slices={slices} />
+      <PollKey slices={slices} />
+    </div>,
     element
   );  
 }
