@@ -17,3 +17,27 @@
 		color: #5eb3b4;
 	}
 }
+
+.chart-wrapper {
+	display: flex;
+
+	& > svg {
+		width: 50%;
+	}
+	.poll-key {
+		width: 50%;
+	}
+
+		.poll-key-entry {
+			text-align: right;
+
+			h4 {
+				display: inline-block;
+			}
+
+			& > svg {
+				height: 1em;
+				display: inline-block;
+			}
+		}
+}

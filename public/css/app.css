@@ -1487,3 +1487,22 @@ body {
   right: 1em;
   bottom: 0;
   color: #5eb3b4; }
+
+.chart-wrapper {
+  display: flex; }
+
+.chart-wrapper > svg {
+  width: 50%; }
+
+.chart-wrapper .poll-key {
+  width: 50%; }
+
+.chart-wrapper .poll-key-entry {
+  text-align: right; }
+
+.chart-wrapper .poll-key-entry h4 {
+  display: inline-block; }
+
+.chart-wrapper .poll-key-entry > svg {
+  height: 1em;
+  display: inline-block; }

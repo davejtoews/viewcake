@@ -23,9 +23,13 @@ var Slide = React.createClass({
   },
   render: function() {
     if (this.props.poll) {
+      var showChart = false;
+      if (viewCakeView == "presenter") {
+        showChart = true;
+      }
       return (
         <section data-transition={this.props.transition} data-background={this.props.background}>
-          <Poll question={this.props.poll.question} answers={this.props.poll.answers} key={this.props.poll._id} _id={this.props.poll._id} />
+          <Poll question={this.props.poll.question} answers={this.props.poll.answers} showChart={showChart} key={this.props.poll._id} _id={this.props.poll._id} />
         </section>
       );
     } else if(!this.props.subSlides || !this.props.subSlides.length) {

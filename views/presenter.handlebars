@@ -1,5 +1,7 @@
 <script src="/public/js/palette.js"></script>
 <script type="text/javascript">
+    var viewCakeView = "presenter";
+    
     var socket = io.connect("http://"+location.hostname+":3030");
 
     function initReveal() {
@@ -36,40 +38,7 @@
         });
 
         socket.on("pollAnswered", function(data){
-            pollId = data.pollId;
-            answer = data.answer;
-            previous = data.previous;
 
-            if(!pollElements[pollId]) {
-                pollElements[pollId] = document.getElementById(pollId).parentNode;
-            }
-
-            if(!chartData[pollId]) {
-                chartData[pollId] = {};
-            } 
-            if(!chartData[pollId][answer]) {
-                chartData[pollId][answer] = 0;
-            }
-            chartData[pollId][answer]++;
-
-            if(previous) {
-                if(!chartData[pollId][previous]) {
-                    chartData[pollId][previous] = 0;
-                }
-                chartData[pollId][previous]--;
-            }
-
-            var chartPalette = palette('tol-sq', Object.keys(chartData[pollId]).length);
-            slices = Object.keys(chartData[pollId]).map(function(sliceName, i){
-                return { key: sliceName, value: chartData[pollId][sliceName], color: "#" + chartPalette[i] }
-            });
-
-            console.log(slices);
-
-            renderPollChart(pollElements[pollId], slices);
-
-            data = getRevealPosition();
-            Reveal.slide(data.indexh, data.indexv, data.indexf);
         });        
     }
 
