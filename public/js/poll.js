@@ -38,30 +38,34 @@ var Poll = React.createClass({
     if (!this.state.chart) {
       return React.createElement(
         'div',
-        { className: 'poll', id: pollId, key: pollId },
+        { className: 'Poll', id: pollId, key: pollId },
         React.createElement(
           'h4',
           null,
           this.props.question
         ),
-        this.props.answers.map(function (answer) {
-          var answerId = "poll-input-" + pollId + answer.replace(/ /g, '');
-          return React.createElement(
-            'div',
-            { className: 'poll-answer', key: answer },
-            React.createElement('input', { type: 'radio', name: 'poll', id: answerId, value: answer, onClick: thisPoll.handleChange }),
-            React.createElement(
-              'label',
-              { htmlFor: answerId },
-              answer
-            )
-          );
-        })
+        React.createElement(
+          'div',
+          { className: 'poll-answers' },
+          this.props.answers.map(function (answer) {
+            var answerId = "poll-input-" + pollId + answer.replace(/ /g, '');
+            return React.createElement(
+              'div',
+              { className: 'poll-answer', key: answer },
+              React.createElement('input', { type: 'radio', name: 'poll', id: answerId, value: answer, onClick: thisPoll.handleChange }),
+              React.createElement(
+                'label',
+                { htmlFor: answerId },
+                answer
+              )
+            );
+          })
+        )
       );
     } else {
       return React.createElement(
         'div',
-        { className: 'poll', id: pollId, key: pollId },
+        { className: 'Poll', id: pollId, key: pollId },
         React.createElement(
           'h4',
           null,

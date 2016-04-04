@@ -1488,11 +1488,21 @@ body {
   bottom: 0;
   color: #5eb3b4; }
 
+.poll-answers {
+  display: inline-block;
+  text-align: left; }
+
+.poll-answers input[type="radio"] {
+  font-size: 100%;
+  position: relative;
+  top: -0.15em; }
+
 .chart-wrapper {
   display: flex; }
 
 .chart-wrapper > svg {
-  width: 50%; }
+  width: 50%;
+  margin-left: 1em; }
 
 .chart-wrapper .poll-key {
   width: 50%; }

@@ -33,24 +33,26 @@ var Poll = React.createClass({
     var thisPoll = this;
     if(!this.state.chart) {
       return (
-        <div className='poll' id={pollId} key={pollId}>
+        <div className='Poll' id={pollId} key={pollId}>
           <h4>{this.props.question}</h4>
-          {
-            this.props.answers.map(function(answer) {
-              var answerId = "poll-input-" + pollId + answer.replace(/ /g,'');
-              return ( 
-                <div className='poll-answer' key={answer}>
-                  <input type='radio' name='poll' id={answerId} value={answer} onClick={thisPoll.handleChange} />
-                  <label htmlFor={answerId}>{answer}</label>
-                </div>
-              );
-            })
-          }
+          <div className="poll-answers">
+            {
+              this.props.answers.map(function(answer) {
+                var answerId = "poll-input-" + pollId + answer.replace(/ /g,'');
+                return ( 
+                  <div className='poll-answer' key={answer}>
+                    <input type='radio' name='poll' id={answerId} value={answer} onClick={thisPoll.handleChange} />
+                    <label htmlFor={answerId}>{answer}</label>
+                  </div>
+                );
+              })
+            }
+          </div>
         </div>
       );
     } else {
       return (
-        <div className='poll' id={pollId} key={pollId}>
+        <div className='Poll' id={pollId} key={pollId}>
           <h4>{this.props.question}</h4>
           <div className="chart-wrapper">
             <PieChart slices={this.state.slices} />
