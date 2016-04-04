@@ -35,9 +35,9 @@ app.configure(configuration(join(__dirname, '..')))
           res.render('viewer', { presentationId: presentationId });
         });      
       } else {
-        app.service('api/presentations').find({query: { name: 'march'}}).then(function(results) {
-          var presentationId  = results.data[0]._id;
-          res.render('viewer', { presentationId: presentationId });
+        app.service('api/configs').find({query: { name: 'default_presentation'}}).then(function(results) {
+          var defaultPresentationId = results.data[0].value;
+          res.render('viewer', { presentationId: defaultPresentationId });
         });
       }
     })

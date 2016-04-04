@@ -1,3 +1,4 @@
+import config from './config';
 import subSlide from './subSlide';
 import poll from './poll';
 import timedPresentation from './timedPresentation';
@@ -23,4 +24,5 @@ export default function() {
   app.configure(timedPresentation);
   app.configure(subSlide);
   app.configure(poll);
+  app.configure(config);
 }
