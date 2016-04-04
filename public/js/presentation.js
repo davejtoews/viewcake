@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
 var SubSlideGroup = React.createClass({
-  displayName: 'SubSlideGroup',
+  displayName: "SubSlideGroup",
 
   render: function render() {
     var slideNodes = this.props.subSlides.map(function (slide) {
       return React.createElement(Slide, { content: slide.content, background: slide.background, transition: slide.transition, subSlides: slide.subSlides, key: slide._id, _id: slide._id });
     });
     return React.createElement(
-      'section',
+      "section",
       null,
       slideNodes
     );
@@ -16,7 +16,7 @@ var SubSlideGroup = React.createClass({
 });
 
 var Slide = React.createClass({
-  displayName: 'Slide',
+  displayName: "Slide",
 
   getInitialState: function getInitialState() {
     return { data: [] };
@@ -26,8 +26,18 @@ var Slide = React.createClass({
     return { __html: rawMarkup };
   },
   render: function render() {
-    if (!this.props.subSlides || !this.props.subSlides.length) {
-      return React.createElement('section', { 'data-transition': this.props.transition, 'data-background': this.props.background, dangerouslySetInnerHTML: this.rawMarkup() });
+    if (this.props.poll) {
+      var showChart = false;
+      if (viewCakeView == "presenter") {
+        showChart = true;
+      }
+      return React.createElement(
+        "section",
+        { "data-transition": this.props.transition, "data-background": this.props.background },
+        React.createElement(Poll, { question: this.props.poll.question, answers: this.props.poll.answers, showChart: showChart, key: this.props.poll._id, _id: this.props.poll._id })
+      );
+    } else if (!this.props.subSlides || !this.props.subSlides.length) {
+      return React.createElement("section", { "data-transition": this.props.transition, "data-background": this.props.background, dangerouslySetInnerHTML: this.rawMarkup() });
     } else {
       return React.createElement(SubSlideGroup, { subSlides: this.props.subSlides });
     }
@@ -35,7 +45,7 @@ var Slide = React.createClass({
 });
 
 var Presentation = React.createClass({
-  displayName: 'Presentation',
+  displayName: "Presentation",
 
   componentDidMount: function componentDidMount() {
     setTimeout(function () {
@@ -45,11 +55,11 @@ var Presentation = React.createClass({
   },
   render: function render() {
     var slideNodes = this.props.data.map(function (slide) {
-      return React.createElement(Slide, { content: slide.content, background: slide.background, transition: slide.transition, subSlides: slide.subSlides, key: slide._id, _id: slide._id });
+      return React.createElement(Slide, { content: slide.content, background: slide.background, transition: slide.transition, subSlides: slide.subSlides, poll: slide.poll, key: slide._id, _id: slide._id });
     });
     return React.createElement(
-      'div',
-      { className: 'slides' },
+      "div",
+      { className: "slides" },
       slideNodes
     );
   }
@@ -67,7 +77,7 @@ function loadPresentation() {
     var populatedSlides = [];
 
     presentationSlides.forEach(function (presentationSlide) {
-      socket.emit('api/slides::get', presentationSlide, { $populate: ['subSlides'] }, function (error, data) {
+      socket.emit('api/slides::get', presentationSlide, { $populate: ['subSlides', 'poll'] }, function (error, data) {
         populatedSlides.push(data);
         if (presentationSlides.length == populatedSlides.length) {
           renderPresentation(populatedSlides);

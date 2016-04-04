@@ -17,3 +17,40 @@
 		color: #5eb3b4;
 	}
 }
+
+.poll-answers {
+    display: inline-block;
+    text-align: left;
+
+    input[type="radio"] {
+	    font-size: 100%;
+	    position: relative;
+	    top: -0.15em;
+    } 
+}
+
+
+.chart-wrapper {
+	display: flex;
+
+	& > svg {
+		width: 50%;
+		margin-left: 1em;
+	}
+	.poll-key {
+		width: 50%;
+	}
+
+		.poll-key-entry {
+			text-align: right;
+
+			h4 {
+				display: inline-block;
+			}
+
+			& > svg {
+				height: 1em;
+				display: inline-block;
+			}
+		}
+}

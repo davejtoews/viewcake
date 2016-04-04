@@ -4,10 +4,12 @@
 // for more of what you can do here.
 
 import mongoose from 'mongoose';
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 let subSlideSchema = new Schema({
   content: {type: String, required: true},
+  poll: { type: ObjectId, ref: 'poll'},
   background: {type: String},
   transition: {type: String},
   createdAt: {type: Date, 'default': Date.now},

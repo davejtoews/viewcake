@@ -12,6 +12,7 @@ let slideSchema = new Schema({
   background: {type: String},
   transition: {type: String},
   subSlides: [{ type: ObjectId, ref: 'subSlide'}],
+  poll: { type:ObjectId, ref: 'poll'},
   createdAt: {type: Date, 'default': Date.now},
   updatedAt: {type: Date, 'default': Date.now}
 });
