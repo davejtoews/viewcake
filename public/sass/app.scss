@@ -46,11 +46,13 @@
 
 			h4 {
 				display: inline-block;
+				width: calc(100% - 2.5em);
 			}
 
 			& > svg {
 				height: 1em;
 				display: inline-block;
+				margin-left: 0.5em;
 			}
 		}
 }

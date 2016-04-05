@@ -1511,8 +1511,10 @@ body {
   text-align: right; }
 
 .chart-wrapper .poll-key-entry h4 {
-  display: inline-block; }
+  display: inline-block;
+  width: calc(100% - 2.5em); }
 
 .chart-wrapper .poll-key-entry > svg {
   height: 1em;
-  display: inline-block; }
+  display: inline-block;
+  margin-left: 0.5em; }
