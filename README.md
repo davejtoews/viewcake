@@ -24,7 +24,7 @@ Make sure MongoDB is running, then from the root directory run
 
 ##  Build tools
 
-Work in progress, see [issue #6](https://github.com/davejtoews/viewcake/issues/6)
+Default `gulp` task will build Sass and front end js and jsx. `gulp watch` will watch for changes. See gulpfile for subtasks.
 
 ## Views
 

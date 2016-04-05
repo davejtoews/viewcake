@@ -73,6 +73,7 @@ gulp.task('jsx:watch', function () {
   gulp.watch('./public/js/src/jsx/*.js', ['jsx']);
 });
 
+gulp.task('default', ['scripts', 'sass', 'jsx']);
 gulp.task('watch', ['scripts:watch', 'sass:watch', 'jsx:watch']);
 
 gulp.task('watch:sync', ['scripts:watch', 'sass:watch', 'jsx:watch'], function() {
