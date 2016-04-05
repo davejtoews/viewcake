@@ -40,7 +40,7 @@ var Poll = React.createClass({
         'div',
         { className: 'Poll', id: pollId, key: pollId },
         React.createElement(
-          'h4',
+          'h3',
           null,
           this.props.question
         ),

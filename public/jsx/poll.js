@@ -34,7 +34,7 @@ var Poll = React.createClass({
     if(!this.state.chart) {
       return (
         <div className='Poll' id={pollId} key={pollId}>
-          <h4>{this.props.question}</h4>
+          <h3>{this.props.question}</h3>
           <div className="poll-answers">
             {
               this.props.answers.map(function(answer) {
