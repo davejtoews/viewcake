@@ -8,9 +8,11 @@ var babelify = require('babelify');
 var watchify = require('watchify');
 var debowerify = require('debowerify');
 var source = require('vinyl-source-stream');
+var gutil = require('gulp-util');
+var babel = require('gulp-babel');
  
 gulp.task('sass', function () {
-  return gulp.src('./public/sass/**/*.scss')
+  return gulp.src('./public/css/sass/**/*.scss')
   	.pipe(sass({includePaths: ['./bower_components']}))
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/css'))
@@ -18,32 +20,65 @@ gulp.task('sass', function () {
 });
  
 gulp.task('sass:watch', function () {
-  gulp.watch('./public/sass/**/*.scss', ['sass']);
+  gulp.watch('./public/css/sass/**/*.scss', ['sass']);
 });
 
+function buildScript(file, watch) {
+  
+  var props = {
+    entries: ['./public/js/src/' + file],
+    debug : false,
+    transform:  [babelify, debowerify]
+  };
+
+  // watchify() if watch requested, otherwise run browserify() once 
+  var bundler = watch ? watchify(browserify(props)) : browserify(props);
+  function rebundle() {
+    var stream = bundler.bundle();
+    return stream
+      //.on('error', handleErrors)
+      .pipe(source(file))
+      .pipe(gulp.dest('./public/js/'));
+  }
+
+  // listen for an update and run rebundle
+  bundler.on('update', function() {
+    rebundle();
+    gutil.log('Rebundle...');
+  });
+
+  // run it once the first time buildScript is called
+  return rebundle();
+}
+
+// run once
 gulp.task('scripts', function() {
-	gulp.src('public/js/main.js')
-		.pipe(browserify({
-			transform: [debowerify, babelify({'presets': ['react']})]
-		}))
-		.pipe(gulp.dest('./public/js'))
+  return buildScript('main.js', false);
 });
 
-gulp.task('buildjs', function () {
-    return browserify({basedir: './public/js/', compact: false})
-        .add("main.js")
-        .transform(babelify, {presets: ['react']})
-        .transform(debowerify)
-        .bundle()
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./public/js/'));
+// run 'scripts' task first, then watch for future changes
+gulp.task('scripts:watch', function() {
+  return buildScript('main.js', true);
 });
 
-gulp.task('watch', function() {
+gulp.task('jsx', function() {
+  return gulp.src('./public/js/src/jsx/*.js')
+    .pipe(babel({
+      presets: ['es2015', 'react']
+    }))
+    .pipe(gulp.dest('./public/js/'));
+});
+
+gulp.task('jsx:watch', function () {
+  gulp.watch('./public/js/src/jsx/*.js', ['jsx']);
+});
+
+gulp.task('watch', ['scripts:watch', 'sass:watch', 'jsx:watch']);
+
+gulp.task('watch:sync', ['scripts:watch', 'sass:watch', 'jsx:watch'], function() {
   browserSync.init(null, {
     proxy: "http://localhost:3030",
     files: ["public/**/*.*", "views/**/*.*"],
     port: 7000,
   });
-  gulp.watch('./public/sass/**/*.scss', ['sass']);
 });
