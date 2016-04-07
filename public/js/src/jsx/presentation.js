@@ -80,7 +80,16 @@ function loadPresentation() {
       socket.emit('api/slides::get', presentationSlide, { $populate: ['subSlides', 'poll'] }, function(error, data) {
         populatedSlides.push(data);
         if (presentationSlides.length == populatedSlides.length) {
-          renderPresentation(populatedSlides);
+          var sortedSlides = presentationSlides.map(function(slideId) {
+            var sortedSlide = {};
+            populatedSlides.forEach(function (slide) {
+              if(slide._id == slideId) {
+                sortedSlide = slide;
+              }
+            });
+            return sortedSlide;
+          });
+          renderPresentation(sortedSlides);
         }
       });
     });
