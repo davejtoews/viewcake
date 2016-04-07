@@ -1499,6 +1499,9 @@ body {
   display: inline-block;
   text-align: left; }
 
+.poll-answers label {
+  font-size: 200%; }
+
 .poll-answers input[type="radio"] {
   font-size: 100%;
   position: relative;

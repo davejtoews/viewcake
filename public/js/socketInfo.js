@@ -13,6 +13,6 @@ socket.on('socketcount', function (data) {
       ' '
     ),
     React.createElement('br', null),
-    'join in at pixels.viewcake.com'
+    'pixels.viewcake.com'
   ), document.getElementById('socketInfo'));
 });

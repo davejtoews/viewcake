@@ -29,6 +29,10 @@
     display: inline-block;
     text-align: left;
 
+    label {
+    	font-size: 200%;
+    }
+
     input[type="radio"] {
 	    font-size: 100%;
 	    position: relative;
