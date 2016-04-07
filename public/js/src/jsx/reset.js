@@ -38,4 +38,4 @@ var ResetForm = React.createClass({
 ReactDOM.render(
 	<ResetForm />,
 	document.getElementById('resetControls')
-	);
+);

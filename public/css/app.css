@@ -1521,3 +1521,16 @@ body {
   height: 1em;
   display: inline-block;
   margin-left: 0.5em; }
+
+.JobForm {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+  justify-content: center;
+  align-items: center; }
+
+.JobForm label {
+  font-size: 0.7em; }
+
+.JobForm input {
+  font-size: 0.5em; }
