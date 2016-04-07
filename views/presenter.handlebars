@@ -5,7 +5,7 @@
     var socket = io.connect("http://"+location.hostname+":3030");
 
     function initReveal() {
-        Reveal.initialize({history: false, showNotes: true, controls: false});
+        Reveal.initialize({history: false, showNotes: true, controls: false, autoSlideStoppable: false});
 
         notifyServer = function(event){
             data = getRevealPosition();

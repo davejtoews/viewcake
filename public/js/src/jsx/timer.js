@@ -39,7 +39,7 @@ var RecordButton = React.createClass({
 
 var RecordButtonRendered = ReactDOM.render(
   <RecordButton />,
-  document.getElementById('react')
+  document.getElementById('timerControls')
 );
 
 socket.on('slidechanged', function (data) {

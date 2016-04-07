@@ -29,36 +29,36 @@ app.configure(configuration(join(__dirname, '..')))
   .engine('handlebars', exphbs({defaultLayout: 'main'}))
   .set('view engine', 'handlebars')
   .get('/', function (req, res) {
-      if(req.headers.host == "data.sitesol.ca") {
-        app.service('api/presentations').find({query: { name: 'data-arch'}}).then(function(results) {
-          var presentationId  = results.data[0]._id;
-          res.render('viewer', { presentationId: presentationId });
-        });      
-      } else {
-        app.service('api/configs').find({query: { name: 'default_presentation'}}).then(function(results) {
-          var defaultPresentationId = results.data[0].value;
-          res.render('viewer', { presentationId: defaultPresentationId });
-        });
-      }
-    })
-    .get('/:presentation', function (req, res) {
-      app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
+    if(req.headers.host == "data.sitesol.ca") {
+      app.service('api/presentations').find({query: { name: 'data-arch'}}).then(function(results) {
         var presentationId  = results.data[0]._id;
         res.render('viewer', { presentationId: presentationId });
+      });      
+    } else {
+      app.service('api/configs').find({query: { name: 'default_presentation'}}).then(function(results) {
+        var defaultPresentationId = results.data[0].value;
+        res.render('viewer', { presentationId: defaultPresentationId });
       });
-    })
-    .get('/:presentation/presenter', function (req, res) {
-      app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
-        var presentationId  = results.data[0]._id;
-        res.render('presenter', { presentationId: presentationId });
-      });
-    })
-    .get('/:presentation/stagehand', function (req, res) {
-      app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
-        var presentationId  = results.data[0]._id;
-        res.render('stagehand', { presentationId: presentationId });
-      });
-    })
+    }
+  })
+  .get('/:presentation', function (req, res) {
+    app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
+      var presentationId  = results.data[0]._id;
+      res.render('viewer', { presentationId: presentationId });
+    });
+  })
+  .get('/:presentation/presenter', function (req, res) {
+    app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
+      var presentationId  = results.data[0]._id;
+      res.render('presenter', { presentationId: presentationId });
+    });
+  })
+  .get('/:presentation/stagehand', function (req, res) {
+    app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
+      var presentationId  = results.data[0]._id;
+      res.render('stagehand', { presentationId: presentationId });
+    });
+  })
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   .configure(hooks())
@@ -75,6 +75,9 @@ app.configure(configuration(join(__dirname, '..')))
       });
       socket.on('disconnect', function () {
         socket.broadcast.emit("socketcount", countSockets());
+      });
+      socket.on('forceReload', function () {
+        socket.broadcast.emit("forceReload");
       });
     });
   }))

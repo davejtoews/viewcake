@@ -5,6 +5,8 @@ socket.on('socketcount', function (data) {
     'p',
     null,
     data,
-    ' squares'
+    ' squares online ',
+    React.createElement('br', null),
+    ' join in at pixels.viewcake.com'
   ), document.getElementById('socketInfo'));
 });

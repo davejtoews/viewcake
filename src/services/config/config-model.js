@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 let configSchema = new Schema({
-  name: {type: String, required: true, index: true},
+  name: {type: String, required: true, index: true, unique: true},
   value: {type: String},
   createdAt: {type: Date, 'default': Date.now},
   updatedAt: {type: Date, 'default': Date.now}

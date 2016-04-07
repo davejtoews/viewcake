@@ -14,7 +14,12 @@
 
 	    socket.on('slidechanged', function (data) {
 	      Reveal.slide(data.indexh, data.indexv, data.indexf);
-	    });    	
+	    });
+
+	    socket.on('forceReload', function() {
+	    	console.log("forceReload");
+	    	window.location.reload();
+	    });
     }
 
 </script>

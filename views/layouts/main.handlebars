@@ -9,8 +9,13 @@
     <body>
         <div class="reveal" id="reveal" data-presentation-id="{{presentationId}}">
         </div>
-        <div id="react"></div>
-        <div id="socketInfo"></div>
+        <div class="overlays">
+            <div class="stagehand-controls">
+                <div id="timerControls"></div>
+                <div id="resetControls"></div>                
+            </div>
+            <div id="socketInfo"></div>
+        </div>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/public/js/main.js"></script>
 
