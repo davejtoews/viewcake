@@ -4,9 +4,15 @@ socket.on('socketcount', function (data) {
   ReactDOM.render(React.createElement(
     'p',
     null,
-    data,
-    ' squares online ',
+    'squares online',
     React.createElement('br', null),
-    ' join in at pixels.viewcake.com'
+    React.createElement(
+      'span',
+      { className: 'square-count' },
+      data,
+      ' '
+    ),
+    React.createElement('br', null),
+    'join in at pixels.viewcake.com'
   ), document.getElementById('socketInfo'));
 });

@@ -1482,13 +1482,18 @@ body {
   bottom: 2em;
   z-index: 100; }
 
-#socketInfo p {
+#socketInfo {
   position: fixed;
   right: 1em;
   bottom: 0;
   color: #377575;
-  font-size: 2vw;
-  text-align: right; }
+  font-size: 2vw; }
+
+#socketInfo p {
+  text-align: center; }
+
+#socketInfo p .square-count {
+  font-size: 2em; }
 
 .poll-answers {
   display: inline-block;

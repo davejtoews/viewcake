@@ -1,6 +1,8 @@
 socket.on('socketcount', function (data) {
   ReactDOM.render(
-    <p>{data} squares online <br /> join in at pixels.viewcake.com</p>,
+	    <p>squares online<br />
+	    <span className="square-count">{data} </span><br />
+	    join in at pixels.viewcake.com</p>,
     document.getElementById('socketInfo')
   );
 });

@@ -10,13 +10,18 @@
 }
 
 #socketInfo {
+	position: fixed;
+	right: 1em;
+	bottom: 0;
+	color: darken(#5eb3b4, 20%);
+	font-size: 2vw;
+	
 	p {
-		position: fixed;
-		right: 1em;
-		bottom: 0;
-		color: darken(#5eb3b4, 20%);
-		font-size: 2vw;
-		text-align: right;
+		text-align: center;
+
+		.square-count {
+			font-size: 2em;
+		}
 	}
 }
 
