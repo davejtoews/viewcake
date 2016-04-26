@@ -31,6 +31,8 @@
 
     label {
     	font-size: 200%;
+    	color: blue;
+    	text-decoration: underline;
     }
 
     input[type="radio"] {
@@ -48,6 +50,7 @@
 	& > svg {
 		width: 50%;
 		margin-left: 1em;
+		height: 480px;
 	}
 	.poll-key {
 		width: 50%;

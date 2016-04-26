@@ -1500,7 +1500,9 @@ body {
   text-align: left; }
 
 .poll-answers label {
-  font-size: 200%; }
+  font-size: 200%;
+  color: blue;
+  text-decoration: underline; }
 
 .poll-answers input[type="radio"] {
   font-size: 100%;
@@ -1513,7 +1515,8 @@ body {
 
 .chart-wrapper > svg {
   width: 50%;
-  margin-left: 1em; }
+  margin-left: 1em;
+  height: 480px; }
 
 .chart-wrapper .poll-key {
   width: 50%; }
