@@ -1495,20 +1495,28 @@ body {
 #socketInfo p .square-count {
   font-size: 2em; }
 
-.poll-answers {
+.Poll h3 {
+  margin-bottom: 1em; }
+
+.Poll .poll-answers {
   display: inline-block;
-  text-align: left; }
+  text-align: center;
+  font-size: 1.25em; }
 
-.poll-answers label {
-  font-size: 200%;
-  color: blue;
-  text-decoration: underline; }
+.poll-answer {
+  height: 3em; }
 
-.poll-answers input[type="radio"] {
-  font-size: 100%;
-  position: relative;
-  top: -0.15em;
-  width: 1em; }
+.poll-answer label {
+  color: #fff;
+  background: #FFA500;
+  padding: 0.5em;
+  border-radius: 0.5em; }
+
+.poll-answer input[type="radio"] {
+  display: none; }
+
+.poll-answer input[type="radio"]:checked + label {
+  background: #FF0000; }
 
 .chart-wrapper {
   display: flex; }
