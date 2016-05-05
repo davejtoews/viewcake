@@ -1,12 +1,13 @@
 @import "reveal.js/css/reveal.scss";
 @import "reveal.js/css/theme/source/simple.scss";
 
-.button {
+button {
 	background: #0088cc;
 	color: #fff;
 	padding: 0.1em .5em .2em;
-	line-height: 1.75em;
 	border-radius: 0.5em;
+	border: none;
+	font-size: 1em;
 }
 
 .LikeButton, .stagehand-controls {
@@ -25,9 +26,6 @@
 	max-width: 8em;
 	background: #ff0000;
 	color: #fff;
-	border: none;
-	border-radius: 0.5em;
-	font-size: 1em;
 }
 
 #socketInfo {
