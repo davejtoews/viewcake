@@ -46,6 +46,9 @@ app.configure(configuration(join(__dirname, '..')))
   .get('/thecall', function (req, res) {
     res.render('thecall', {presentationId: 0});
   })
+  .get('/slidemaker', function (req, res) {
+    res.render('slidemaker', {presentationId: 0});
+  })
   .get('/:presentation', function (req, res) {
     app.service('api/presentations').find({query: { name: req.params.presentation}}).then(function(results) {
       var presentationId  = results.data[0]._id;
