@@ -4,7 +4,7 @@
 	var socket = io.connect("http://"+location.hostname+":3030");
 
     function initReveal() {
-    	Reveal.initialize({history: false, controls: false, keyboard: false, touch: false});
+    	Reveal.initialize({history: false, controls: false, keyboard: false, touch: false, progress: false});
     }
 
     function initSocket() {   
@@ -14,7 +14,13 @@
 
 	    socket.on('slidechanged', function (data) {
 	      Reveal.slide(data.indexh, data.indexv, data.indexf);
+	      presentationId = document.getElementById('reveal').dataset.presentationId;
+	      ga('send', 'event', 'Presentation', 'slidechanged', JSON.stringify(getRevealPosition()), presentationId);
 	    });
+
+	    setTimeout(function() {
+	    	socket.emit('requestPosition');
+	    }, 1000);
 
 	    socket.on('forceReload', function() {
 	    	console.log("forceReload");
@@ -22,7 +28,25 @@
 	    });
     }
 
+    function getRevealPosition() {
+        return {
+                indexv : Reveal.getIndices().v,
+                indexh : Reveal.getIndices().h,
+                indexf : Reveal.getIndices().f || 0
+        };
+    }
+
 </script>
 <script src="/public/js/poll.js"></script>
 <script src="/public/js/presentation.js"></script>
-<!--<script src="/public/js/pageLike.js"></script>-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57700392-8', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script src="/public/js/donateButton.js"></script>

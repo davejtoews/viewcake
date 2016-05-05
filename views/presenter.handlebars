@@ -28,6 +28,8 @@
         };
     }
 
+
+
     
     var chartData = {};
     var pollElements = {}
@@ -36,10 +38,10 @@
         socket.on("message", function(data){
             console.log(data);
         });
-
-        socket.on("pollAnswered", function(data){
-
-        });        
+   
+        socket.on('slidechanged', function (data) {
+          console.log("hek");
+        });
     }
 
 

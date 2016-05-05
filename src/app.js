@@ -20,6 +20,8 @@ function countSockets() {
   return Object.keys(app.io.sockets.sockets).length;
 }
 
+var slidePos;
+
 app.configure(configuration(join(__dirname, '..')))
   .use(compress())
   .options('*', cors())
@@ -71,6 +73,7 @@ app.configure(configuration(join(__dirname, '..')))
       socket.emit("message", "Welcome to Viewcake");
       socket.broadcast.emit("socketcount", countSockets());
       socket.on("slidechanged", function(data){
+        slidePos = data;
         socket.broadcast.emit("slidechanged", data);
       });
       socket.on("pollAnswered", function(data){
@@ -81,6 +84,10 @@ app.configure(configuration(join(__dirname, '..')))
       });
       socket.on('forceReload', function () {
         socket.broadcast.emit("forceReload");
+      });
+      socket.on('requestPosition', function () {
+        console.log(slidePos);
+        socket.emit("slidechanged", slidePos);
       });
     });
   }))

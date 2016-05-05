@@ -1482,6 +1482,18 @@ body {
   bottom: 2em;
   z-index: 100; }
 
+.DonateButton {
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+  z-index: 100;
+  max-width: 8em;
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  font-size: 1em; }
+
 #socketInfo {
   position: fixed;
   right: 1em;
