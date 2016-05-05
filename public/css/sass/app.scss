@@ -1,6 +1,14 @@
 @import "reveal.js/css/reveal.scss";
 @import "reveal.js/css/theme/source/simple.scss";
 
+.button {
+	background: #0088cc;
+	color: #fff;
+	padding: 0.1em .5em .2em;
+	line-height: 1.75em;
+	border-radius: 0.5em;
+}
+
 .LikeButton, .stagehand-controls {
 	position: fixed;
 	width: 6em;
