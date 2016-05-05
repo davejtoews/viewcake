@@ -83,6 +83,7 @@ app.configure(configuration(join(__dirname, '..')))
         socket.broadcast.emit("socketcount", countSockets());
       });
       socket.on('forceReload', function () {
+        slidePos = {};
         socket.broadcast.emit("forceReload");
       });
       socket.on('requestPosition', function () {
