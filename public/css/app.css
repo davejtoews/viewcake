@@ -1482,7 +1482,8 @@ button {
   border-radius: 0.5em;
   border: none;
   font-size: 1em;
-  cursor: pointer; }
+  cursor: pointer;
+  box-shadow: -2px 4px 4px 2px rgba(0, 0, 0, 0.75); }
 
 button:hover {
   background: #0000ee; }

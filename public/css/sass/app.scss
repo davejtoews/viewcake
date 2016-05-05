@@ -9,6 +9,7 @@ button {
 	border: none;
 	font-size: 1em;
 	cursor: pointer;
+	box-shadow: -2px 4px 4px 2px rgba(0,0,0,0.75);
 
 	&:hover {
 		background: #0000ee;
