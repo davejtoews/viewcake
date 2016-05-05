@@ -8,6 +8,11 @@ button {
 	border-radius: 0.5em;
 	border: none;
 	font-size: 1em;
+	cursor: pointer;
+
+	&:hover {
+		background: #0000ee;
+	}
 }
 
 .LikeButton, .stagehand-controls {
