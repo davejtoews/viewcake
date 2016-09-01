@@ -5,7 +5,9 @@ var JobForm = React.createClass({
 			company_project: '',
 			contact_name: '',
 			contact_email: '',
-			url: ''
+			url: '',
+			last_submitted_id: '',
+			presentation: ''
 		};
 	},
 	generateContent: function() {
@@ -28,25 +30,69 @@ var JobForm = React.createClass({
 		var thisForm = this;
 		socket.emit('api/slides::create', {content: content}, function(error, data) {
 			if(!error) {
-				thisForm.setState(thisForm.getInitialState());
+				thisForm.setState({
+					opportunity_type: '',
+					company_project: '',
+					contact_name: '',
+					contact_email: '',
+					url: '',
+					last_submitted_id: ''
+				});
+				thisForm.setState({'last_submitted_id': data._id});
 			}
 		});
 	},
+	handleAddToPres: function(event) {
+		event.preventDefault();
+		last_submitted_id = this.state.last_submitted_id;
+		socket.emit('api/presentations::find', {name: this.state.presentation}, function(error, data) {
+			if(data.data.length == 1) {
+				var slidesArray = data.data[0].slides;
+				var presId = data.data[0]._id;
+				slidesArray.push(last_submitted_id);
+				socket.emit('api/presentations::patch', presId,  { slides: slidesArray }, function(error, data) {
+					console.log(data);
+					console.error(error);
+				});
+			} else {
+				console.log("Too many results");
+			}
+		});
+	},
+	handleReset: function(){
+		socket.emit("forceReloadPres");
+	},
 	render: function() {
+
 		return (
-			<form className='JobForm'>
-				<label htmlFor='opportunity_type'>Opportunity Type: </label>
-				<input type='text' name='opportunity_type' id='opportunity_type' value={this.state.opportunity_type} onChange={this.handleChange} /> <br />
-				<label htmlFor='company_project'>Company/Project: </label>
-				<input type='text' name='company_project' id='company_project' value={this.state.company_project} onChange={this.handleChange} /> <br />
-				<label htmlFor='contact_name'>Contact Name: </label>
-				<input type='text' name='contact_name' id='contact_name' value={this.state.contact_name} onChange={this.handleChange} /> <br />
-				<label htmlFor='contact_email'>Contact Email: </label>
-				<input type='text' name='contact_email' id='contact_email' value={this.state.contact_email} onChange={this.handleChange} /> <br />
-				<label htmlFor='url'>Url: </label>
-				<input type='text' name='url' id='url' value={this.state.url} onChange={this.handleChange} /> <br />
-				<input type='submit' onClick={this.handleClick} />
-			</form>
+			<div className="forms-wrapper">
+				<form className='JobForm'>
+					<label htmlFor='opportunity_type'>Opportunity Type: </label>
+					<input type='text' name='opportunity_type' id='opportunity_type' value={this.state.opportunity_type} onChange={this.handleChange} /> <br />
+					<label htmlFor='company_project'>Company/Project: </label>
+					<input type='text' name='company_project' id='company_project' value={this.state.company_project} onChange={this.handleChange} /> <br />
+					<label htmlFor='contact_name'>Contact Name: </label>
+					<input type='text' name='contact_name' id='contact_name' value={this.state.contact_name} onChange={this.handleChange} /> <br />
+					<label htmlFor='contact_email'>Contact Email: </label>
+					<input type='text' name='contact_email' id='contact_email' value={this.state.contact_email} onChange={this.handleChange} /> <br />
+					<label htmlFor='url'>Url: </label>
+					<input type='text' name='url' id='url' value={this.state.url} onChange={this.handleChange} /> <br />
+					<input type='submit' onClick={this.handleClick} />
+				</form>
+				<form className="JobForm">
+					<label htmlFor="last_submitted_id">Last Submitted</label>
+					<input type="text" name="last_submitted_id" id="last_submitted_id" value={this.state.last_submitted_id} onChange={this.handleChange}/>
+					<label htmlFor="presentation">Presentation</label>
+					<input type="text" name="presentation" id="presentation" value={this.state.presentation} onChange={this.handleChange}/>
+					<input type='submit' onClick={this.handleAddToPres} />
+					<button className="reset-button" onClick={this.handleReset} >
+						Reset
+					</button>
+
+				</form>			
+			</div>
+
+
 		);
 	}
 });

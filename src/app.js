@@ -86,6 +86,10 @@ app.configure(configuration(join(__dirname, '..')))
         slidePos = {};
         socket.broadcast.emit("forceReload");
       });
+      socket.on('forceReloadPres', function () {
+        slidePos = {};
+        socket.broadcast.emit("forceReloadPres");
+      });
       socket.on('requestPosition', function () {
         console.log(slidePos);
         socket.emit("slidechanged", slidePos);

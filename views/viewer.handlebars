@@ -26,6 +26,10 @@
 	    	console.log("forceReload");
 	    	window.location.reload();
 	    });
+      socket.on('forceReloadPres', function() {
+        console.log("forceReloadPres");
+        window.location.reload();
+      });
     }
 
     function getRevealPosition() {
@@ -49,4 +53,4 @@
   ga('send', 'pageview');
 
 </script>
-<script src="/public/js/donateButton.js"></script>
+<!--<script src="/public/js/donateButton.js"></script>-->

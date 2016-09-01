@@ -9,7 +9,9 @@ var JobForm = React.createClass({
 			company_project: '',
 			contact_name: '',
 			contact_email: '',
-			url: ''
+			url: '',
+			last_submitted_id: '',
+			presentation: ''
 		};
 	},
 	generateContent: function generateContent() {
@@ -32,55 +34,110 @@ var JobForm = React.createClass({
 		var thisForm = this;
 		socket.emit('api/slides::create', { content: content }, function (error, data) {
 			if (!error) {
-				thisForm.setState(thisForm.getInitialState());
+				thisForm.setState({
+					opportunity_type: '',
+					company_project: '',
+					contact_name: '',
+					contact_email: '',
+					url: '',
+					last_submitted_id: ''
+				});
+				thisForm.setState({ 'last_submitted_id': data._id });
 			}
 		});
 	},
+	handleAddToPres: function handleAddToPres(event) {
+		event.preventDefault();
+		last_submitted_id = this.state.last_submitted_id;
+		socket.emit('api/presentations::find', { name: this.state.presentation }, function (error, data) {
+			if (data.data.length == 1) {
+				var slidesArray = data.data[0].slides;
+				var presId = data.data[0]._id;
+				slidesArray.push(last_submitted_id);
+				socket.emit('api/presentations::patch', presId, { slides: slidesArray }, function (error, data) {
+					console.log(data);
+					console.error(error);
+				});
+			} else {
+				console.log("Too many results");
+			}
+		});
+	},
+	handleReset: function handleReset() {
+		socket.emit("forceReloadPres");
+	},
 	render: function render() {
+
 		return React.createElement(
-			'form',
-			{ className: 'JobForm' },
+			'div',
+			{ className: 'forms-wrapper' },
 			React.createElement(
-				'label',
-				{ htmlFor: 'opportunity_type' },
-				'Opportunity Type: '
+				'form',
+				{ className: 'JobForm' },
+				React.createElement(
+					'label',
+					{ htmlFor: 'opportunity_type' },
+					'Opportunity Type: '
+				),
+				React.createElement('input', { type: 'text', name: 'opportunity_type', id: 'opportunity_type', value: this.state.opportunity_type, onChange: this.handleChange }),
+				' ',
+				React.createElement('br', null),
+				React.createElement(
+					'label',
+					{ htmlFor: 'company_project' },
+					'Company/Project: '
+				),
+				React.createElement('input', { type: 'text', name: 'company_project', id: 'company_project', value: this.state.company_project, onChange: this.handleChange }),
+				' ',
+				React.createElement('br', null),
+				React.createElement(
+					'label',
+					{ htmlFor: 'contact_name' },
+					'Contact Name: '
+				),
+				React.createElement('input', { type: 'text', name: 'contact_name', id: 'contact_name', value: this.state.contact_name, onChange: this.handleChange }),
+				' ',
+				React.createElement('br', null),
+				React.createElement(
+					'label',
+					{ htmlFor: 'contact_email' },
+					'Contact Email: '
+				),
+				React.createElement('input', { type: 'text', name: 'contact_email', id: 'contact_email', value: this.state.contact_email, onChange: this.handleChange }),
+				' ',
+				React.createElement('br', null),
+				React.createElement(
+					'label',
+					{ htmlFor: 'url' },
+					'Url: '
+				),
+				React.createElement('input', { type: 'text', name: 'url', id: 'url', value: this.state.url, onChange: this.handleChange }),
+				' ',
+				React.createElement('br', null),
+				React.createElement('input', { type: 'submit', onClick: this.handleClick })
 			),
-			React.createElement('input', { type: 'text', name: 'opportunity_type', id: 'opportunity_type', value: this.state.opportunity_type, onChange: this.handleChange }),
-			' ',
-			React.createElement('br', null),
 			React.createElement(
-				'label',
-				{ htmlFor: 'company_project' },
-				'Company/Project: '
-			),
-			React.createElement('input', { type: 'text', name: 'company_project', id: 'company_project', value: this.state.company_project, onChange: this.handleChange }),
-			' ',
-			React.createElement('br', null),
-			React.createElement(
-				'label',
-				{ htmlFor: 'contact_name' },
-				'Contact Name: '
-			),
-			React.createElement('input', { type: 'text', name: 'contact_name', id: 'contact_name', value: this.state.contact_name, onChange: this.handleChange }),
-			' ',
-			React.createElement('br', null),
-			React.createElement(
-				'label',
-				{ htmlFor: 'contact_email' },
-				'Contact Email: '
-			),
-			React.createElement('input', { type: 'text', name: 'contact_email', id: 'contact_email', value: this.state.contact_email, onChange: this.handleChange }),
-			' ',
-			React.createElement('br', null),
-			React.createElement(
-				'label',
-				{ htmlFor: 'url' },
-				'Url: '
-			),
-			React.createElement('input', { type: 'text', name: 'url', id: 'url', value: this.state.url, onChange: this.handleChange }),
-			' ',
-			React.createElement('br', null),
-			React.createElement('input', { type: 'submit', onClick: this.handleClick })
+				'form',
+				{ className: 'JobForm' },
+				React.createElement(
+					'label',
+					{ htmlFor: 'last_submitted_id' },
+					'Last Submitted'
+				),
+				React.createElement('input', { type: 'text', name: 'last_submitted_id', id: 'last_submitted_id', value: this.state.last_submitted_id, onChange: this.handleChange }),
+				React.createElement(
+					'label',
+					{ htmlFor: 'presentation' },
+					'Presentation'
+				),
+				React.createElement('input', { type: 'text', name: 'presentation', id: 'presentation', value: this.state.presentation, onChange: this.handleChange }),
+				React.createElement('input', { type: 'submit', onClick: this.handleAddToPres }),
+				React.createElement(
+					'button',
+					{ className: 'reset-button', onClick: this.handleReset },
+					'Reset'
+				)
+			)
 		);
 	}
 });

@@ -42,6 +42,10 @@
         socket.on('slidechanged', function (data) {
           console.log("hek");
         });
+        socket.on('forceReloadPres', function() {
+            console.log("forceReloadPres");
+            window.location.reload();
+        });
     }
 
 
