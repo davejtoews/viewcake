@@ -35,8 +35,7 @@ var JobForm = React.createClass({
 					company_project: '',
 					contact_name: '',
 					contact_email: '',
-					url: '',
-					last_submitted_id: ''
+					url: ''
 				});
 				thisForm.setState({'last_submitted_id': data._id});
 			}
@@ -51,8 +50,11 @@ var JobForm = React.createClass({
 				var presId = data.data[0]._id;
 				slidesArray.push(last_submitted_id);
 				socket.emit('api/presentations::patch', presId,  { slides: slidesArray }, function(error, data) {
-					console.log(data);
-					console.error(error);
+					if(!error) {
+						thisForm.setState({
+							last_submitted_id: ''
+						});						
+					}
 				});
 			} else {
 				console.log("Too many results");
