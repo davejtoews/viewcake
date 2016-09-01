@@ -43,7 +43,8 @@ var JobForm = React.createClass({
 	},
 	handleAddToPres: function(event) {
 		event.preventDefault();
-		last_submitted_id = this.state.last_submitted_id;
+		var last_submitted_id = this.state.last_submitted_id;
+		var thisForm = this;
 		socket.emit('api/presentations::find', {name: this.state.presentation}, function(error, data) {
 			if(data.data.length == 1) {
 				var slidesArray = data.data[0].slides;
